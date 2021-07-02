@@ -23,13 +23,25 @@ limit = momepy.buffered_limit(buildings)
 tessellation = momepy.Tessellation(buildings, unique_id='uID', limit=limit)
 tessellation_gdf = tessellation.tessellation
 
+# calculate neighbour features
+sw1 = momepy.sw_high(k=1, gdf=tessellation_gdf, ids='uID')
 
-# visualize tessellation
+buildings['neighbour'] = momepy.Neighbors(buildings, sw1, 'uID').series
+
+
+# visualization
+buildings = buildings.dropna(subset=['neighbour'])
 f, ax = plt.subplots(figsize=(10, 10))
-tessellation_gdf.plot(ax=ax)
-buildings.plot(ax=ax, color='white', alpha=.5)
+buildings.plot(ax=ax, column='neighbour', scheme='naturalbreaks', k=15, legend=True, cmap='Spectral')
 ax.set_axis_off()
 plt.show()
+
+# # visualize tessellation
+# f, ax = plt.subplots(figsize=(10, 10))
+# tessellation_gdf.plot(ax=ax)
+# buildings.plot(ax=ax, color='white', alpha=.5)
+# ax.set_axis_off()
+# plt.show()
 
 
 
