@@ -1,4 +1,5 @@
 # import momepy
+import os
 import random
 import geopandas as gpd
 from matplotlib import pyplot as plt
@@ -6,6 +7,8 @@ from matplotlib import pyplot as plt
 # some threshold and need man-made parameters
 Num_pt_svimg_for_everybuilding = 2
 Num_sampling = 2
+Save_Path = r'D:\Work\buildingheight\building_height_street_view\data\HD_sample_data\sample_1\\'
+Save_Name = '1block-sampling-result.geojson'
 
 # plot window
 fig, ax = plt.subplots(figsize=(12, 12))
@@ -108,5 +111,11 @@ else:
     sample_idx = random.sample(range(len(bldg_can_sampling)),Num_sampling)
     bldg_sampling_res = bldg_can_sampling.iloc[sample_idx,:]
     print('sample successfully!******\nsample_idx: {}\nsampling result: {}\n'.format(sample_idx, bldg_sampling_res))
+
+
+
+'''final step: save'''
+bldg_sampling_res.to_file(os.path.join(Save_Path, Save_Name), driver='GeoJSON')
+print('\n\nsave sampling result successfully!')
 
 # plt.show()
