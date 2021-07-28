@@ -11,10 +11,10 @@ import osmnx as ox
 # load building street and tessilation
 buildings = gpd.read_file('HD_building_all.geojson').to_crs(epsg=3035)
 streets = gpd.read_file('HD_street.gpkg', layer='edges').to_crs(epsg=3035)
-
+buildings['uID'] = momepy.unique_id(buildings)
 # preprocess the buildings
 buildings = momepy.preprocess(buildings, size=30,
-                              compactness=True, islands=True)
+                              compactness=True, islands=True)                     # reason for 30?
 
 # add uID for buildings
 # buildings['uID'] = momepy.unique_id(buildings)
@@ -23,6 +23,11 @@ limit = momepy.buffered_limit(buildings)
 # generate morphological tessellation
 tessellation = momepy.Tessellation(buildings, unique_id='uID', limit=limit)
 tessellation_gdf = tessellation.tessellation
+
+
+# save tessellation_temp to geojson
+save_repo = 'tessellation_temp.gpkg'
+tessellation_gdf.to_file(save_repo)
 
 # # visualize the streets, buildings and tessellation all together
 # f, ax = plt.subplots(figsize=(10, 10))
