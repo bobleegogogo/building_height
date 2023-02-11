@@ -47,3 +47,11 @@ Specifically, the proposed method consists of three parts: first, we propose an 
 |<p>street\_based\_block\_phi</p><p></p>|Anisotropy index of the street-based block at the building location.|` `[0, 1]|
 |street\_based\_block\_area|Area of the street-based block at the building location.|squared meter|
 \* 50,200,500m buffers applied and the mean and std values were calculated.
+
+## Contact
+
+Dr. Hao Li \
+Email: [hao_bgd.li@tum.de](mailto:hao_bgd.li@tum.de)\
+Technische Universität München, Dartment Aerospace and Geodesy \
+Professur für Big Geospatial Data Management \
+Lise Meitner Str. 9, 85521 Ottobrunn
